@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+		
+		<title>Scientific calculator </title>
+		<style>
+   body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.contuner {
+    color: white;
+    font-weight: bold;
+    background-color: #333;
+    border-radius: 10px;
+    padding: 15px;
+    width: 100%;
+    max-width: 500px; /* حد أقصى للعرض على أجهزة الكمبيوتر */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    height: auto;
+    min-height: 600px;
+}
+
+.task {
+    color: black;
+    height: 70px;9
+    width: 90%;
+    margin: 15px auto;
+    border: 2px solid #0036b3;
+    border-radius: 10px;
+    background-color: #ccc;
+    text-align: right;
+    padding: 15px;
+    font-size: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.main {
+    margin: 15px auto;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    background-color: dimgrey;
+    padding: 10px;
+    height: auto;
+    min-height: 400px;
+}
+
+.one {
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: darkcyan;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#squer {
+    grid-column: span 3;
+    background-color: midnightblue;
+}
+
+#clear {
+    grid-row: span 2;
+    background-color: midnightblue;
+}
+
+#exit {
+    grid-column: span 1;
+    background-color: midnightblue;
+}
+
+.one:hover {
+    transform: scale(1.05);
+    border: 2px solid white;
+    background-color: black;
+}
+
+#squer:hover,
+#clear:hover,
+#exit:hover {
+    background-color: black;
+}
+
+/* وسائط استعلام للشاشات الأكبر (أجهزة الكمبيوتر) */
+@media (min-width: 768px) {
+    .contuner {
+        max-width: 700px;
+        padding: 20px;
+       height:70vh;
+    }
+    
+    .task {
+        height: 80px;
+        font-size: 30px;
+        padding: 20px;
+    }
+    
+    .main {
+        grid-gap: 15px;
+        padding: 15px;
+       height:58vh;
+    }
+    
+    .one {
+        padding: 20px;
+        font-size: 25px;
+       border-radius: 13px;
+    }
+}
+
+/* وسائط استعلام للشاشات الصغيرة جدًا */
+@media (max-width: 400px) {
+    .one {
+        padding: 10px;
+        font-size: 16px;
+    }
+    
+    .task {
+        height: 60px;
+        font-size: 20px;
+    }
+}
+
+
+	
+		</style>
+</head>
+<body>
+		<div class="contuner">
+			 Calculator <img src="img/b_browse.png">
+				<div class="task" id="task">0</div>
+				
+				<div class="main">
+						
+										<button class="one" id="one" onclick="appendToTask('1')"> 1 						</button>
+												<button class="one" id="tow" onclick="appendToTask('2')"> 2 </button>
+														<button class="one" id="there" onclick="appendToTask('3')"> 3</button>
+														<button class="one" id="for" onclick="appendToTask('4')"> 4 </button>
+														<button class="one" id="five" onclick="appendToTask('5')"> 5</button>
+														<button class="one" id="six" onclick="appendToTask('6')"> 6 </button>
+														<button class="one" id="seven" onclick="appendToTask('7')"> 7 </button>
+														<button class="one" id="eat" onclick="appendToTask('8')"> 8 </button>
+						<button class="one" id="nin" onclick="appendToTask('9')"> 9 </button>
+														<button class="one"id="tan" onclick="appendToTask('0')"> 0</button>
+														<button class="one" id="sub" onclick="choosOpration('-')">-</button>
+														<button class="one" id="div" onclick="choosOpration('+')"> +</button>
+														<button class="one" id="plus" onclick="choosOpration('/')">÷</button>
+														<button class="one" id="mul" onclick="choosOpration('*')"> *</button>
+						<button class="one" id="mul" onclick="choosOpration('√')" style="background-color:chocolate">√2</button>
+						<button class="one" id="mul" onclick="choosOpration('^')"style="background-color:chocolate"> √3</button>
+											
+						<button class="one" id="one" onclick="appendToTask('180')"> π</button>
+			<button class="one" id="one" onclick="choosOpration('f')"style="background-color:chocolate"> Fct				</button>
+								<button class="one" id="one" onclick="choosOpration('T')"style="background-color:chocolate"> C(n,r)</button>
+								<button class="one" id="one" onclick="Delete()"style="background-color:chocolate"> ×</button>
+								<button class="one" id="one" onclick="choosOpration('p')"style="background-color:chocolate"> pow						</button>
+								
+											<button class="one" id="one" onclick="choosOpration('P')"style="background-color:green">P(n,r)</button>
+									<button class="one" id="exit" onclick="appendToTask('.')"> .</button>
+														<button class="one" id="clear" onclick="clarTask()"style="background-color:crimson">C</button>
+														<button class="one"  id="squer" onclick="calculeat()"> =</button>
+						
+				</div>
+				
+		</div>
+		
+		<script> 
+		
+		let calc ='0';// العدد الحالى الشكل الطبيعي ا
+let previsinput = '';//العدد السابق 
+let opration= null;//العملية
+let resetInput = false;//حالة الادخال 
+
+function updatetask(){//دالة تحديث الشاشه 
+       const task=parseFloat(calc).toLocaleString();//هنا لكلي عندما ندخل ارقام كبيرة يجعلها بشكل مرتب ويعمل لها فواصل
+document.getElementById('task').textContent = task;
+ }
+
+function appendToTask(number){
+    new Audio('').play(); //الازرار متوقف حاليا اضف ياراشدي هنا فقط ربط صوت هنا  تشغيل صوت
+    // ... الكود الحالي
+				if(calc === '0' || resetInput){
+								calc ='';
+								resetInput = false;
+								
+				}
+       
+				if(number === '.' && calc.includes('.')){
+								return;
+				}
+              
+       
+       
+				calc += number;
+       
+				
+				updatetask();
+				
+}
+
+		function clarTask(){//الحذف وتحديث الشاشه بشكل نهائي
+						calc ='0';
+						previsinput = '';
+						opration = null;
+						document.getElementById('task').innerHTML =`<i style="color: red;background-color:#ccc; text-align: center;">برمجة:م/محمد القحوم</i>`;
+        
+        
+			
+		}						
+
+
+function choosOpration(op){//اهم دالة ياراشدي دالة فحص العمليات 
+				
+				  if(calc === '0') return;
+				
+				if(previsinput !==''){//اذا كان هناك عملية معلة تنقله الى الدالة الحسابية المذكوره
+								calculeat();
+				}
+    
+      
+				 opration = op;
+				previsinput = calc;
+       
+				calc ='0';
+}
+
+ function calculeat(){//دالة الحسابية 
+    
+        if(calc.length > 10){
+               document.getElementById('task').innerHTML =`<p style="color:red ;background-color:#ccc;">الرقم كبير جدآ </p>`;
+        }
+        
+ 		 if (previsinput === '' || opration === null) return;
+        
+ 				const prev = parseFloat(previsinput);
+ 				const curr = parseFloat(calc);
+if(isNaN(prev) || isNaN(curr)) return;
+ 						let timp;
+ 				switch(opration){
+ 			 case '+'	:
+ 								timp = prev + curr;
+ 								break;
+ 								case '-':
+ 								timp = prev - curr;
+ 								break;
+ 				       case '/':
+ 								timp = prev / curr;
+ 								break;
+ 								case '*':
+ 								timp = prev * curr;
+ 								break;
+ 				       case '√':
+ 				  timp= squer(prev);
+ 				       break;
+ 				       case '^':
+ 				       timp= squer3(prev);
+ 				       break;
+ 				       case 'f':
+ 				       timp= Fact(prev);
+ 				       break;
+ 				       case 'p':
+ 				       timp= Power(prev,curr);
+ 				       break;
+ 				       case 'T':
+ 				       timp= Twa_Fic(prev ,curr);
+ 				       break;
+ 				       case 'P':
+ 				       timp= P_Tbadil(prev,curr);
+ 				       break;
+ 								default:
+ 						     		return;
+ 				}		
+ 				calc = timp.toString();
+ 				opration = null;
+ 				resetInput = true;
+ 				previsinput ='';
+ 				updatetask();
+ 				
+ }
+
+
+updatetask();
+				
+				
+				function squer(number){//دالة الجذر التربيعي
+				     if(number <= 1){
+				            document.getElementById('task').innerHTML =`<p style="color:red ;background-color:#ccc;">الرقم ليس له جذر تربيعي  </p>`;
+        
+				     }
+				       for(let i=2;i<= number ;i++)
+				       {if(i*i === number )
+				              return i;
+				       }
+				}
+
+
+function squer3(number){//دالة الجذر التكعيبي
+				     if(number <= 1){
+				            document.getElementById('task').innerHTML =`<p style="color:red ;background-color:#ccc;">الرقم ليس له جذر تكعيبي !  </p>`;
+        
+				     }
+				       for(let i=2;i<= number ;i++)
+				       {if(i*i*i === number )
+				              return i;
+				       }
+				}
+
+
+function Fact(n){//دالة الفكتوريا
+       let s=1;
+       if(n === 1)
+       {return 1;
+       }
+          for( let i= n;i >= 1;i-- ){
+        s = s * i;
+              
+       }
+       console.log(s);
+       return s;
+       
+}
+
+
+function Power(n,c){//دالة الاس والاساس  
+       
+       if(n === 1){
+				       document.getElementById('task').innerHTML=`<p>ادخل عدد صحيح </p>`;
+				}
+       
+       let s=1;
+          for(let i= 1; i<= c;i++){
+        s = s * n;
+          				
+          }
+              return s;
+}
+
+//حساب التوافيق 
+function Twa_Fic(n,r){//دالة التوافيق 
+       
+       
+    if(n   > r){
+          return Fact(n) / (Fact(r) *(Fact( n-r)));
+    }
+       if( r > n){
+              return Fact(r) /(Fact(n) *(Fact(r-n)));
+       }
+       
+}
+
+function P_Tbadil(n,r){
+       //دالة التباديل 
+    if(n   > r){
+          return Fact(n) / (Fact(n-r));
+    }
+       if( r > n){
+              return Fact(r) /(Fact(r-n));
+       }
+       
+}
+
+
+  function Delete(){//داله الحذف على رقم رقم /
+				  let s;
+				while(calc !== 0){
+								   s = calc/10;
+				       calc=parseInt(s);
+				       document.getElementById('task').textContent=parseInt(s);
+								return ;
+				}
+				
+}     
+		</script>
+</body>
+</html>
